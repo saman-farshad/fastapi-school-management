@@ -1,0 +1,28 @@
+### VS Code REST Client extension: run the API first.
+@base = http://127.0.0.1:8000
+@token = REPLACE_WITH_ACCESS_TOKEN
+
+### Login (username means email)
+POST {{base}}/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username=admin@example.com&password=ChangeThisPassword123!
+
+### Who am I?
+GET {{base}}/users/me
+Authorization: Bearer {{token}}
+
+### Create a course as admin
+POST {{base}}/courses
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"code":"DS101","title":"Python Data Science","teacher_id":2,"capacity":20,"day_of_week":1,"start_time":"09:00:00","end_time":"10:30:00","room":"C-201"}
+
+### List courses
+GET {{base}}/courses
+Authorization: Bearer {{token}}
+
+### Student's own report (use student access token)
+GET {{base}}/students/me/report
+Authorization: Bearer {{token}}
